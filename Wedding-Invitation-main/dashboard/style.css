@@ -1,0 +1,1095 @@
+/* 1. Tema, warna, ukuran, dan font utama */
+
+:root {
+  --paper:    #f4f1ea;
+  --paper-2:  #ebe5d9;
+  --ink:      #17181a;
+  --ink-2:    #5e6058;
+  --rule:     #d6d0c3;
+  --accent:   #55604a;
+
+  --nav-h:    68px;
+  --maxw:     1240px;
+  --gutter:   clamp(1.25rem, 5vw, 3.5rem);
+  --measure:  30rem;
+
+  --sp-1: .25rem;
+  --sp-2: .5rem;
+  --sp-3: .75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 5rem;
+  --pad: clamp(4.5rem, 12vh, 9rem);
+  /* 2. Tinggi kartu buku tamu */
+  --kartu-h: clamp(6.75rem, 13.5svh, 7rem);
+  /* 3. Tinggi panel dekorasi di sisi kanan */
+  --plate-h: min(calc(100svh - var(--nav-h) - var(--sp-8)), 36rem);
+
+  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --text:    "Newsreader", Georgia, "Times New Roman", serif;
+  --arab:    "Amiri", "Traditional Arabic", "Geeza Pro", serif;
+  /* 4. Font skrip untuk nama dan tanda ampersand */
+  --script:      "Great Vibes", "Snell Roundhand", "Apple Chancery", cursive;
+  --script-amp:  "Pinyon Script", "Snell Roundhand", "Apple Chancery", cursive;
+
+  --ease: cubic-bezier(.2, .8, .3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* 5. Menyembunyikan tampilan scrollbar tanpa menonaktifkan scroll */
+* { scrollbar-width: none; }
+*::-webkit-scrollbar { display: none; }
+
+html {
+  scroll-behavior: smooth;
+  /* 6. Jarak aman saat navigasi scroll */
+  scroll-padding-top: calc(var(--nav-h) + var(--sp-5));
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.0625rem/1.7 var(--text);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 400; line-height: 1.05; }
+p { margin: 0; }
+dl, dd, dt { margin: 0; }
+img { display: block; max-width: 100%; }
+
+section[id], article[id] { scroll-margin-top: 0; }
+
+/* 7. Label struktural untuk penomoran bab */
+.tamu__wall-label {
+  font-size: .75rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* 8. Navigasi */
+/* 9. Header navigasi semi-transparan */
+/* 10. Susunan brand dan judul navigasi */
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: var(--nav-h);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--sp-4);
+  padding-inline: var(--gutter);
+  color: var(--ink);
+  background: color-mix(in srgb, #f7f3ea 76%, transparent);
+  backdrop-filter: blur(14px) saturate(1.06);
+  -webkit-backdrop-filter: blur(14px) saturate(1.06);
+  transition: background .4s var(--ease), box-shadow .4s var(--ease);
+}
+.nav.is-stuck {
+  background: color-mix(in srgb, #f7f3ea 93%, transparent);
+  box-shadow: 0 1px 0 var(--rule);
+}
+
+/* 11. Susunan judul dan nama di sisi kiri */
+.nav__stack {
+  justify-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  /* 12. Posisi brand dari tepi halaman */
+  margin-left: calc(var(--sp-5) + var(--sp-4));
+}
+
+/* 13. Ukuran judul navigasi */
+.nav__title {
+  font-family: var(--display);
+  font-size: .9375rem;
+  font-weight: 500;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--ink-2);
+  white-space: nowrap;
+  transform: scaleX(.92);
+  transform-origin: left center;
+}
+
+.nav__brand {
+  font-family: var(--display);
+  font-size: .8125rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  line-height: 1.2;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav__brand em {
+  font-style: italic;
+  color: #b8912e;
+}
+
+/* 14. Ornamen tepi navigasi */
+.nav__edge {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: 1.75rem;
+  height: auto;
+  color: #b8912e;
+  opacity: .7;
+  pointer-events: none;
+}
+.nav__edge--l { left: var(--sp-3); }
+.nav__edge--r { right: var(--sp-3); }
+.nav__edge svg { display: block; width: 100%; height: auto; }
+
+.nav__links {
+  justify-self: end;
+  display: flex;
+  gap: clamp(.75rem, 1.9vw, 1.75rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav__link {
+  position: relative;
+  display: block;
+  padding-block: var(--sp-1);
+  font-size: .875rem;
+  color: var(--ink-2);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .3s var(--ease);
+}
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 1px;
+  background: #b8912e;
+  transform: scaleX(0);
+  transition: transform .35s var(--ease);
+}
+.nav__link:hover { color: var(--ink); }
+.nav__link:hover::after,
+.nav__link.is-active::after { transform: scaleX(1); }
+.nav__link.is-active { color: #8a6d1f; }
+
+.nav__toggle { position: absolute; opacity: 0; pointer-events: none; }
+.nav__burger { display: none; }
+
+/* 15. Tombol */
+.btn {
+  display: inline-block;
+  padding: .8rem 1.75rem;
+  font: inherit;
+  font-size: .9375rem;
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+}
+.btn:hover { background: var(--accent); border-color: var(--accent); }
+.btn--ghost { background: transparent; color: var(--ink); }
+.btn--ghost:hover { color: var(--paper); }
+
+/* 16. Sampul */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: var(--sp-8);
+  padding: calc(var(--nav-h) + var(--sp-8)) var(--gutter) var(--sp-7);
+  color: var(--paper);
+  background-color: var(--ink);
+  background-image: url("assets/cincin.jpg");
+  background-size: cover;
+  background-position: center 44%;
+}
+/* 17. Memburamkan area sekitar foto cincin */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  backdrop-filter: blur(16px) saturate(.95);
+  mask-image: radial-gradient(ellipse 54% 42% at 50% 58%, transparent, #000 80%);
+  pointer-events: none;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--ink) 86%, transparent) 0%,
+    color-mix(in srgb, var(--ink) 28%, transparent) 46%,
+    color-mix(in srgb, var(--ink) 88%, transparent) 86%);
+  pointer-events: none;
+}
+.hero > * { position: relative; z-index: 2; }
+/* 18. Bayangan lembut pada teks hero */
+.hero__kicker, .hero__title, .hero__facts dd, .hero__facts dt {
+  text-shadow: 0 2px 26px rgb(23 24 26 / .55);
+}
+
+/* 19. Susunan kicker dan judul hero */
+.hero__inner {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 60rem;
+}
+.hero__kicker {
+  font-size: .75rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--paper) 45%, var(--accent));
+  margin-bottom: var(--sp-5);
+}
+.hero__title {
+  font-family: var(--script);
+/* 20. Batas ukuran judul hero */
+  font-size: clamp(3.5rem, 12.5vw, 8.75rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.1;
+}
+.hero__title em {
+  font-family: var(--script-amp);
+  font-style: normal;
+  font-size: .62em;
+  color: color-mix(in srgb, var(--paper) 40%, var(--accent));
+  padding-inline: .1em;
+  vertical-align: .1em;
+}
+
+.hero__facts {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  padding-top: var(--sp-5);
+  border-top: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);
+}
+.hero__facts dl {
+  display: grid;
+  grid-template-columns: 6rem auto;
+  gap: var(--sp-2) var(--sp-5);
+  font-size: .9375rem;
+}
+.hero__facts dt { color: color-mix(in srgb, var(--paper) 48%, transparent); }
+.hero__facts dd { color: var(--paper); }
+
+/* 21. Posisi panah bawah hero */
+.hero__facts { position: relative; }
+.hero__down {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  translate: -50% 0;
+  color: color-mix(in srgb, var(--paper) 62%, transparent);
+  opacity: var(--fade, 1);
+  transition: opacity .2s linear;
+}
+.hero__down.is-gone { visibility: hidden; pointer-events: none; }
+
+/* 22. Penyesuaian hero untuk layar pendek */
+@media (max-height: 900px) {
+  .hero {
+    padding-top: calc(var(--nav-h) + var(--sp-6));
+    padding-bottom: var(--sp-5);
+    gap: var(--sp-5);
+  }
+  .hero__title { font-size: min(clamp(3.25rem, 12.5vw, 8.75rem), 19svh); }
+  .hero__facts { padding-top: var(--sp-4); }
+  .hero__facts dl { gap: var(--sp-1) var(--sp-5); }
+}
+/* 23. Penyesuaian hero untuk layar sangat pendek */
+@media (max-height: 560px) {
+  .hero {
+    padding-top: calc(var(--nav-h) + var(--sp-4));
+    padding-bottom: var(--sp-3);
+    gap: var(--sp-3);
+  }
+  .hero__title { font-size: min(clamp(2.25rem, 12.5vw, 8.75rem), 16svh); }
+  .hero__facts { padding-top: var(--sp-3); }
+  .hero__facts dl { gap: 0 var(--sp-4); font-size: .875rem; }
+}
+.hero__down-mark { display: block; width: 1.25rem; height: auto; overflow: visible; }
+.hero__down-mark path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .18;
+  animation: chevron 1.9s var(--ease) infinite;
+}
+.hero__down-mark path:nth-child(2) { animation-delay: .3s; }
+.hero__down-mark path:nth-child(3) { animation-delay: .6s; }
+@keyframes chevron {
+  0%, 100% { opacity: .16; transform: translateY(-1.5px); }
+  32%      { opacity: 1;   transform: translateY(1.5px); }
+  66%      { opacity: .22; transform: translateY(0); }
+}
+
+/* 24. Proses pernikahan */
+.prosesi {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .85fr);
+  gap: clamp(2.5rem, 7vw, 6rem);
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: var(--pad) var(--gutter);
+  align-items: start;
+}
+
+/* 25. Menyamakan pusat isi dengan panel kanan */
+.prosesi__steps { padding-bottom: 4svh; }
+
+.step {
+  min-height: 64svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: .22;
+  transition: opacity .55s var(--ease);
+}
+.step.is-active { opacity: 1; }
+.step__title {
+  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  letter-spacing: -.025em;
+  margin-bottom: var(--sp-5);
+}
+.step__body { max-width: var(--measure); color: var(--ink-2); }
+.step__body + .step__body { margin-top: var(--sp-4); }
+
+/* 26. Panel dekorasi di sisi kanan */
+.prosesi__plate {
+  position: sticky;
+  /* 27. Jarak panel dari navbar */
+  top: calc(var(--nav-h) + var(--sp-7));
+  height: var(--plate-h);
+  display: flex;
+}
+.plate { position: relative; width: 100%; }
+
+/* 28. Tata letak kartu akad dan resepsi */
+.acara {
+  width: min(56rem, 100%);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: clamp(2rem, 3.5vw, 3.5rem);
+  align-items: start;
+  margin-top: var(--sp-6);
+}
+.acara__rule {
+  width: 1px;
+  align-self: stretch;
+  background: var(--rule);
+}
+.acara__name {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  letter-spacing: -.025em;
+  margin-bottom: var(--sp-4);
+}
+.acara__desc { color: var(--ink-2); }
+.acara__meta {
+  margin-top: var(--sp-5);
+  display: grid;
+  grid-template-columns: 4.25rem 1fr;
+  column-gap: var(--sp-3);
+  row-gap: var(--sp-2);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--rule);
+  font-size: .9375rem;
+}
+.acara__meta dt { color: var(--ink-2); }
+.acara__meta dd { font-weight: 500; }
+.acara__cta { display: block; width: fit-content; margin: var(--sp-7) auto 0; }
+
+@media (max-width: 760px) {
+  .acara { grid-template-columns: 1fr; row-gap: var(--sp-6); }
+  .acara__rule { display: none; }
+}
+
+/* 29. Berkah */
+.berkah {
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-7);
+  padding: var(--pad) var(--gutter);
+  background: var(--ink);
+  color: var(--paper);
+  text-align: center;
+}
+
+.ornamen { display: block; width: 1.375rem; color: color-mix(in srgb, var(--paper) 34%, var(--accent)); }
+.ornamen svg { display: block; width: 100%; fill: none; stroke: currentColor; stroke-width: 1.1; }
+
+.kutipan { max-width: 40rem; margin: 0; display: grid; gap: var(--sp-4); }
+
+/* 30. Ukuran dan jarak teks Arab */
+.kutipan__arab {
+  font-family: var(--arab);
+  font-size: clamp(1.375rem, 3vw, 2rem);
+  font-weight: 400;
+  line-height: 2.05;
+  text-align: center;
+  color: color-mix(in srgb, var(--paper) 88%, var(--accent));
+}
+
+.kutipan__arti {
+  max-width: 34rem;
+  margin-inline: auto;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--paper) 72%, transparent);
+}
+
+.kutipan__sumber {
+  font-size: .8125rem;
+  font-style: normal;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--paper) 52%, var(--accent));
+}
+
+/* 31. Section umum */
+.section { max-width: var(--maxw); margin-inline: auto; padding: var(--pad) var(--gutter); }
+/* 32. Tata letak buku tamu agar muat satu layar */
+.section--tight { padding-block: clamp(.75rem, 2.4vh, 1.75rem); }
+.section--tight .section__head { margin-bottom: clamp(.625rem, 2.15vh, 1.6rem); }
+.section--tight .section__head h2 { font-size: clamp(1.75rem, 4.2vw, 2.75rem); }
+.section--tint { max-width: none; background: var(--paper-2); }
+.section--tint > * { max-width: var(--maxw); margin-inline: auto; }
+
+.section__head {
+  padding-bottom: var(--sp-4);
+  margin-bottom: var(--sp-8);
+  border-bottom: 1px solid var(--rule);
+}
+.section__head h2 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  letter-spacing: -.025em;
+}
+
+/* 33. Panel formulir buku tamu */
+.tamu {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+/* 34. Tampilan formulir setelah terkunci */
+.tamu__form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(.5rem, 1.3vh, 1rem);
+  padding: clamp(.75rem, 2vh, 1.5rem);
+  border: 1px solid var(--rule);
+  background: var(--paper-2);
+}
+/* 35. Font skrip dan warna aksen pada kondisi terkunci */
+.tamu__form--terkunci { position: relative; }
+.tamu__form--terkunci > :not(.tamu__lock) {
+  filter: blur(3px);
+  opacity: .5;
+  pointer-events: none;
+  user-select: none;
+}
+.tamu__lock {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: var(--sp-4);
+  /* 36. Penanda fokus input */
+  font-family: var(--script);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.3;
+  text-align: center;
+  color: color-mix(in srgb, var(--accent) 75%, var(--ink));
+}
+.field { display: block; }
+.field > span {
+  display: block;
+  margin-bottom: var(--sp-1);
+  font-size: .75rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  transition: color .25s var(--ease);
+}
+/* 37. Tinggi textarea responsif */
+.field:focus-within > span { color: var(--accent); }
+.field:has(.is-invalid) > span { color: #a4453c; }
+
+.field input, .field textarea {
+  width: 100%;
+  padding: clamp(.375rem, 1.1vh, .5rem) 0;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--ink-2);
+  transition: border-color .25s var(--ease);
+}
+/* 38. Pilihan kehadiran */
+.field textarea { resize: vertical; line-height: 1.6; height: clamp(3.25rem, 10.9svh, 6.5rem); }
+.field input::placeholder, .field textarea::placeholder { color: color-mix(in srgb, var(--ink-2) 45%, transparent); }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+.field input.is-invalid, .field textarea.is-invalid { border-color: #a4453c; }
+
+/* 39. Tata letak kartu ucapan */
+.hadir { min-width: 0; margin: 0; padding: 0; border: 0; }
+.hadir legend {
+  padding: 0;
+  margin-bottom: var(--sp-1);
+  font-size: .75rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.hadir__opsi { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
+.hadir__pilih { position: relative; display: block; cursor: pointer; }
+.hadir__pilih input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.hadir__pilih span {
+  display: block;
+  padding: var(--sp-2) var(--sp-3);
+  text-align: center;
+  font-size: .875rem;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.hadir__pilih:hover span { border-color: var(--ink-2); }
+.hadir__pilih input:checked + span {
+  color: var(--paper);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.hadir__pilih input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.tamu__foot { display: grid; gap: var(--sp-3); }
+.tamu__foot .btn { width: 100%; }
+.tamu__msg { font-size: .9375rem; color: #a4453c; }
+.tamu__msg.is-ok { color: var(--accent); }
+.tamu__msg:empty { display: none; }
+
+.tamu__wall {
+  padding: var(--sp-4) 0 0;
+  border-top: 2px solid var(--ink);
+}
+.tamu__wall-label { color: var(--ink-2); }
+
+/* 40. Bingkai foto pengantin */
+.tamu__list {
+  list-style: none;
+  margin: var(--sp-3) 0 0;
+  padding: 0 var(--sp-3) 0 0;
+  max-height: calc(var(--kartu-h) * 3);
+  overflow-y: auto;
+}
+.tamu__list li {
+  position: relative;
+  height: var(--kartu-h);
+  padding: var(--sp-2) var(--sp-5) var(--sp-2) var(--sp-4);
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+}
+/* 41. Bingkai pasangan dengan ornamen SVG */
+.pengantin__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  margin-top: var(--sp-3);
+}
+.pengantin__row .pengantin__wrap { margin: 0; flex-shrink: 0; }
+.pengantin__row .step__body { margin: 0; max-width: 26rem; }
+.pengantin__wrap {
+  position: relative;
+  width: min(22rem, 52svh, 46vw);
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+  margin: 0;
+}
+/* 42. Dekorasi bingkai dan bayangan */
+.pengantin__wrap:not(.pengantin__wrap--person) {
+  width: min(19rem, 42svh, 60vw);
+  aspect-ratio: 4 / 5;
+}
+/* 43. Efek hover bingkai */
+.pengantin__wrap:not(.pengantin__wrap--person) {
+  filter: drop-shadow(0 3px 8px rgb(37 31 26 / .16));
+  transition: transform .35s var(--ease);
+}
+/* 44. Bingkai foto pasangan */
+.pengantin__wrap:not(.pengantin__wrap--person):hover { transform: scale(1.03); }
+.pengantin__outline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.pengantin__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  margin: 0;
+}
+.pengantin__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  display: block;
+}
+/* 45. Section Pengantar */
+.pengantin__frame:not(.pengantin__frame--person) .pengantin__photo {
+  position: absolute;
+  inset: 17px;
+  width: calc(100% - 34px);
+  height: calc(100% - 34px);
+}
+/* 46. Tampilan surat pengantar */
+.step.is-blank { background: var(--paper); }
+
+/* 47. Pola desktop untuk surat pengantar */
+#pengantar { align-items: center; text-align: center; gap: var(--sp-5); }
+#pengantar .ornamen { color: color-mix(in srgb, var(--ink) 55%, var(--accent)); }
+.pengantar__mas {
+  max-width: 30rem;
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+.pengantar__ucap {
+  max-width: 30rem;
+  margin: 0;
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.pengantar__salam {
+  margin: var(--sp-2) 0 0;
+  padding-top: var(--sp-5);
+  min-width: min(18rem, 80%);
+  border-top: 1px solid var(--rule);
+  font-family: var(--display);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  letter-spacing: .01em;
+  color: var(--ink);
+}
+@media (max-width: 880px) {
+  .pengantar__mas, .pengantar__ucap { padding-inline: var(--sp-4); }
+}
+
+/* 48. Label kehadiran pada kartu ucapan */
+@media (min-width: 1001px) {
+  #pengantar { width: calc(100% + 102.2%); min-height: 100svh; }
+}
+
+.tamu__list li::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--sp-2) + .65rem);
+  left: 0;
+  width: 12px;
+  height: 1px;
+  background: var(--accent);
+}
+.tamu__list b {
+  display: block;
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.tamu__list small {
+  display: block;
+  margin-top: 2px;
+  font-size: .75rem;
+  line-height: 1.25;
+  letter-spacing: .14em;
+  color: var(--ink-2);
+}
+/* 49. Batas tampilan pesan */
+.tamu__hadir {
+  display: inline-block;
+  margin-right: var(--sp-2);
+  padding: 1px var(--sp-2);
+  font-style: normal;
+  font-size: .6875rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 2px;
+  vertical-align: 1px;
+}
+.tamu__hadir.is-tidak {
+  color: var(--ink-2);
+  border-color: var(--rule);
+}
+/* 50. Lokasi */
+.tamu__list p {
+  margin-top: var(--sp-1);
+  font-size: .9375rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.tamu__empty { margin-top: var(--sp-4); color: var(--ink-2); font-style: italic; }
+.tamu__empty[hidden] { display: none; }
+
+/* 51. Footer */
+.lokasi {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr);
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+.lokasi__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-5);
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+}
+.lokasi__lead { font-size: 1.1875rem; max-width: 26rem; }
+.lokasi__meta { display: grid; gap: var(--sp-4); }
+.lokasi__meta dt { margin-bottom: var(--sp-1); font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); }
+.lokasi__meta dd { font-size: .9375rem; }
+.lokasi__credit { margin-top: auto; font-size: .8125rem; color: var(--ink-2); }
+
+.lokasi__map { border-left: 1px solid var(--rule); min-height: 20rem; position: relative; }
+.lokasi__map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* 52. Ruang bawah footer */
+.footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  flex-wrap: wrap;
+  /* 53. Gaya nama pada footer */
+  padding: var(--sp-8) var(--gutter) calc(var(--sp-8) + 2.5rem);
+  background: var(--ink);
+  color: var(--paper);
+}
+/* 54. Tombol kembali ke atas */
+.footer__names {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  line-height: 1.2;
+}
+.footer__names span {
+  font-style: italic;
+  color: color-mix(in srgb, var(--paper) 45%, var(--accent));
+}
+.footer__meta { font-size: .875rem; color: color-mix(in srgb, var(--paper) 60%, transparent); }
+
+/* 55. Responsif */
+.top {
+  position: fixed;
+  left: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  z-index: 40;
+  width: 2.75rem; height: 2.75rem;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .3s var(--ease), transform .3s var(--ease), visibility .3s, border-color .3s;
+}
+.top.is-show { opacity: 1; visibility: visible; transform: none; }
+.top:hover { border-color: var(--ink); }
+
+/* 56. Penyesuaian jarak navigasi di bawah 1100px */
+/* 57. Tata letak pengantin pada satu kolom */
+@media (max-width: 1100px) {
+  .nav__links { gap: clamp(.5rem, 1.4vw, 1.1rem); }
+  .nav__link { font-size: .8125rem; }
+  .nav__edge { display: none; }
+}
+
+/* 58. Melepas panel dekorasi di mobile */
+@media (max-width: 1000px) {
+  .prosesi { grid-template-columns: 1fr; gap: 0; }
+  /* 59. Memusatkan isi langkah di mobile */
+  .prosesi__plate { display: none; }
+  .prosesi__steps { padding-block: 0 var(--sp-8); }
+  /* 60. Tinggi langkah pada mobile */
+  .step { min-height: 100svh; justify-content: center; padding-bottom: var(--sp-6); }
+  /* 61. Header mobile */
+  .top { display: none; }
+
+  .lokasi { grid-template-columns: 1fr; }
+  .lokasi__map { border-left: 0; border-top: 1px solid var(--rule); order: -1; }
+  .lokasi__map iframe { min-height: 17rem; }
+  .lokasi__credit { margin-top: var(--sp-3); }
+  .lokasi { align-items: start; }
+  .lokasi__info { padding: var(--sp-3); gap: var(--sp-3); }
+  .lokasi__map { min-height: 12rem; }
+  .lokasi__map iframe { min-height: 12rem; }
+}
+
+@media (max-width: 760px) {
+  :root { --nav-h: 58px; --pad: clamp(3.5rem, 9vh, 5rem); }
+
+  .nav { padding-inline: var(--sp-5); }
+  .nav__burger { display: block; width: 1.75rem; height: 1.5rem; cursor: pointer; }
+  .nav__burger span { display: block; height: 1px; background: var(--ink); transition: transform .3s var(--ease); }
+  .nav__burger span + span { margin-top: 6px; }
+  .nav__toggle:checked ~ .nav__burger span:first-child { transform: translateY(3.5px) rotate(45deg); }
+  .nav__toggle:checked ~ .nav__burger span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+
+  /* 62. Jarak huruf Great Vibes pada mobile */
+  .nav__stack { margin-left: 0; gap: 2px; }
+  .nav__title { font-size: .8125rem; letter-spacing: .26em; }
+  .nav__brand { font-size: .75rem; }
+
+  .nav__links {
+    position: absolute;
+    inset: var(--nav-h) 0 auto;
+    flex-direction: column;
+    gap: 0;
+    padding: var(--sp-2) var(--sp-5) var(--sp-5);
+    background: color-mix(in srgb, #f7f3ea 97%, transparent);
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path .35s var(--ease);
+  }
+  .nav__toggle:checked ~ .nav__links { clip-path: inset(0 0 0 0); }
+  .nav__link { padding-block: var(--sp-3); border-bottom: 1px solid var(--rule); }
+  .nav__link::after { display: none; }
+  .nav__link.is-active { padding-left: var(--sp-3); border-left: 2px solid #b8912e; }
+
+  .hero { gap: var(--sp-6); }
+  .hero__facts { flex-direction: column; align-items: flex-start; gap: var(--sp-5); }
+  .hero__facts dl { grid-template-columns: 5rem auto; width: 100%; }
+  /* 63. Susunan facts dan panah hero pada mobile */
+  .hero__title { letter-spacing: 0; text-indent: 0; }
+  /* 64. Aksesibilitas */
+  .hero__down { position: static; translate: none; align-self: center; }
+  .tamu { grid-template-columns: 1fr; }
+}
+
+/* Countdown sampul */
+.hero__countdown {
+  position: absolute;
+  bottom: var(--sp-5);
+  right: var(--gutter);
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(.25rem, .8vw, .5rem);
+  color: var(--paper);
+  text-shadow: 0 2px 26px rgb(23 24 26 / .55);
+}
+.countdown__unit {
+  display: grid;
+  justify-items: center;
+  gap: .2rem;
+  min-width: 2.25rem;
+}
+.countdown__num {
+  font-family: var(--display);
+  font-size: clamp(1.375rem, 2.6vw, 2rem);
+  font-weight: 500;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.countdown__label {
+  font-size: .625rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--paper) 72%, transparent);
+}
+.countdown__sep {
+  font-family: var(--display);
+  font-size: clamp(1.375rem, 2.6vw, 2rem);
+  line-height: 1;
+  opacity: .7;
+  transform: translateY(0);
+}
+
+/* 65. Gelombang latar */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.btn-primary {
+  --bs-btn-color: var(--paper);
+  --bs-btn-bg: var(--ink);
+  --bs-btn-border-color: var(--ink);
+  --bs-btn-hover-color: var(--paper);
+  --bs-btn-hover-bg: var(--accent);
+  --bs-btn-hover-border-color: var(--accent);
+  --bs-btn-active-bg: var(--accent);
+  --bs-btn-active-border-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
+  .step { opacity: 1; }
+  /* 66. Penyesuaian bagian pengantin */
+  .hero__down-mark path { opacity: .55 !important; transform: none !important; }
+}
+
+
+
+/* 67. Jarak judul pengantin dan acara */
+#pengantin { position: relative; }
+#pengantin .step__title { margin-bottom: var(--sp-5); font-size: clamp(2.5rem, 6.5vw, 4.25rem); align-self: flex-end; margin-top: -1.25rem; }
+
+/* 68. Posisi judul pengantin di desktop */
+#acara { margin-top: var(--sp-8); }
+
+/* 69. Lebar artikel pengantin */
+@media (min-width: 1001px) {
+  #pengantin .step__title {
+    position: absolute;
+    top: 0;
+    /* 70. Ukuran foto pasangan di desktop */
+    right: 2rem;
+    margin: 0;
+  }
+  /* 71. Lebar band acara dan isi tengah */
+  .pengantin__wrap:not(.pengantin__wrap--person) { width: min(24rem, 46svh, 30vw); }
+  /* 72. Jarak judul lokasi */
+  #acara { width: calc(100% + 102.2%); }
+}
+
+/* 73. Jarak judul dan konten lokasi */
+/* 74. Padding atas lokasi */
+#lokasi .section__head { margin-bottom: var(--sp-4); }
+
+/* 75. Interaksi foto pengantin */
+#lokasi.section { padding-top: var(--sp-6); padding-bottom: var(--sp-6); }
+/* 76. Mode foto pengantin terpisah */
+.pengantin__frame { cursor: pointer; }
+.pengantin__frame:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+/* 77. Pemusatan foto pengantin terpisah */
+.pengantin--split .pengantin__row > .pengantin__wrap,
+.pengantin--split .pengantin__row > .step__body { display: none; }
+.pengantin--split .pengantin__split { display: flex; }
+/* 78. Jarak vertikal foto pengantin terpisah */
+/* 79. Posisi foto pengantin di atas panel */
+.pengantin--split .pengantin__row { justify-content: flex-start; margin-top: calc(var(--sp-7) + 2rem); }
+.pengantin__split { display: none; flex: none; flex-direction: row; align-items: center; justify-content: center; gap: clamp(2rem, 3.5vw, 3rem); width: calc(100% + 102.2%); }
+.pengantin__person { margin: 0; display: flex; flex-direction: column; align-items: center; gap: var(--sp-3); min-width: 0; flex: none; }
+/* 80. Pemisah ampersand antar foto */
+.pengantin--split .pengantin__person { position: relative; z-index: 2; }
+.pengantin__wrap--person { position: relative; width: min(17.5rem, 34svh, 22vw); aspect-ratio: 3 / 4; min-height: 0; margin: 0; }
+/* 81. Ilustrasi transparan tanpa bingkai */
+.pengantin__amp { flex: none; font-family: var(--script-amp); font-style: normal; font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1; color: color-mix(in srgb, var(--ink) 40%, var(--accent)); align-self: center; }
+/* 82. Panel deskripsi di balik foto */
+/* 83. Pergeseran foto pria saat dibuka */
+.pengantin__frame--person {
+  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0;
+  -webkit-mask-image: none; mask-image: none;
+  background: var(--paper);
+  z-index: 1;
+  transition: transform .5s var(--ease);
+}
+.pengantin__desc {
+  position: absolute; inset: 0; margin: 0;
+  display: flex; flex-direction: column; align-items: flex-start; gap: .15rem;
+  padding: 1.15rem 1rem;
+  color: var(--ink);
+}
+.pengantin__desc dt { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.pengantin__desc dd { margin: 0 0 .6rem; font-size: .95rem; line-height: 1.35; }
+.pengantin__desc dd:last-child { margin-bottom: 0; }
+/* 84. Pergeseran foto saat panel deskripsi dibuka */
+.pengantin__person--pria .pengantin__desc { align-items: flex-end; text-align: right; padding-left: calc(100% - var(--bukaX) + .25rem); }
+.pengantin__person--wanita .pengantin__desc { padding-right: calc(100% - var(--bukaX) + .25rem); }
+/* 85. Penyesuaian desktop untuk foto pasangan */
+.pengantin__person { --bukaX: 66%; }
+.pengantin__person.is-open .pengantin__frame--person { transform: translateX(var(--bukaX)); }
+.pengantin__person--pria.is-open .pengantin__frame--person { transform: translateX(calc(-1 * var(--bukaX))); }
+@media (max-width: 1000px) {
+  .pengantin__person { --bukaX: 46%; }
+  .pengantin__desc { padding: .85rem .75rem; }
+  .pengantin__desc dd { font-size: .85rem; }
+}
+
+/* 86. Latar transparan PNG */
+@media (min-width: 1001px) {
+  #pengantin { width: calc(100% + 102.2%); }
+  .pengantin--split .pengantin__split { width: 100%; }
+}
+
+/* 87. Tata letak satu kolom di bawah 1000px */
+.pengantin__frame--person .pengantin__photo { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; background: var(--paper); }
+.pengantin__caption { color: var(--ink-2); font-size: .8125rem; letter-spacing: .16em; text-transform: uppercase; }
+
+@media (max-width: 760px) {
+  .pengantin__split { flex-direction: column; }
+  .pengantin__wrap--person { width: min(17rem, 36svh, 55vw); }
+}
+
+/* 88. Tata letak layar sempit */
+@media (max-width: 1000px) {
+  .pengantin--split .pengantin__row { justify-content: center; }
+  .pengantin__split { width: 100%; gap: clamp(2rem, 5vw, 2.75rem); }
+}
+
+/* 89. Penyesuaian akhir untuk layar sempit */
+@media (max-width: 760px) {
+  .pengantin__person { --bukaX: 40%; }
+  .pengantin__person .pengantin__desc { align-items: flex-start; text-align: left; }
+}

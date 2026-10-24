@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wedding Invitation</title>
+<meta name="description" content="Undangan pernikahan Muhammad dan Siti, Senin 30 November 2026 di Masjid Nasional Al-Akbar, Surabaya.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&amp;family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&amp;family=Great+Vibes&amp;family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <span class="nav__edge nav__edge--l" aria-hidden="true">
+    <svg viewBox="0 0 24 12" focusable="false">
+      <path d="M1 6h7M16 6h7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+      <path d="M12 1.2 15 6l-3 4.8L9 6z" fill="currentColor"/>
+    </svg>
+  </span>
+
+  <div class="nav__stack">
+    <span class="nav__title">The Wedding</span>
+    <a class="nav__brand" href="#pembuka">Muhammad <em>&amp;</em> Siti</a>
+  </div>
+
+  <span class="nav__edge nav__edge--r" aria-hidden="true">
+    <svg viewBox="0 0 24 12" focusable="false">
+      <path d="M1 6h7M16 6h7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+      <path d="M12 1.2 15 6l-3 4.8L9 6z" fill="currentColor"/>
+    </svg>
+  </span>
+
+  <input type="checkbox" id="navToggle" class="nav__toggle" hidden>
+  <label for="navToggle" class="nav__burger" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span>
+  </label>
+
+  <ul class="nav__links" id="navLinks">
+    <li><a class="nav__link" href="#pembuka">Beranda</a></li>
+    <li><a class="nav__link" href="#pengantin">Pengantin</a></li>
+    <li><a class="nav__link" href="#acara">Acara</a></li>
+    <li><a class="nav__link" href="#pengantar">Pengantar</a></li>
+    <li><a class="nav__link" href="#lokasi">Lokasi</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- 1. Sampul undangan -->
+  <section class="hero" id="pembuka">
+    <div class="hero__countdown" aria-live="polite" aria-label="Hitung mundur menuju hari pernikahan">
+      <div class="countdown__unit">
+        <span class="countdown__num" id="cdDays">00</span>
+        <span class="countdown__label">Hari</span>
+      </div>
+      <span class="countdown__sep" aria-hidden="true">:</span>
+      <div class="countdown__unit">
+        <span class="countdown__num" id="cdHours">00</span>
+        <span class="countdown__label">Jam</span>
+      </div>
+      <span class="countdown__sep" aria-hidden="true">:</span>
+      <div class="countdown__unit">
+        <span class="countdown__num" id="cdMinutes">00</span>
+        <span class="countdown__label">Menit</span>
+      </div>
+      <span class="countdown__sep" aria-hidden="true">:</span>
+      <div class="countdown__unit">
+        <span class="countdown__num" id="cdSeconds">00</span>
+        <span class="countdown__label">Detik</span>
+      </div>
+    </div>
+
+    <div class="hero__inner">
+      <p class="hero__kicker">Undangan Pernikahan</p>
+      <h1 class="hero__title">Muhammad <em>&amp;</em>&nbsp;Siti</h1>
+    </div>
+
+    <div class="hero__facts">
+      <dl>
+        <dt>Hari</dt>        <dd>Senin</dd>
+        <dt>Tanggal</dt>     <dd>30 November 2026</dd>
+        <dt>Waktu</dt>       <dd>09.00 WIB</dd>
+
+        <dt>Kota</dt>        <dd>Surabaya</dd>
+      </dl>
+
+      <a class="hero__down" href="#pengantin" aria-label="Lanjut ke pengantin">
+        <svg class="hero__down-mark" viewBox="0 0 24 36" aria-hidden="true">
+          <path d="M3 5l9 7 9-7"/>
+          <path d="M3 15l9 7 9-7"/>
+          <path d="M3 25l9 7 9-7"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- 2. Bagian proses pernikahan -->
+  <section class="prosesi" aria-label="Prosesi pernikahan">
+
+    <div class="prosesi__steps">
+
+      <article class="step is-active" id="pengantin" data-step="pengantin">
+        <h2 class="step__title">Pengantin</h2>
+        <div class="pengantin__row">
+        <div class="pengantin__wrap">
+          <div class="pengantin__frame" id="pengantinCouple" role="button" tabindex="0" aria-expanded="false"
+               aria-label="Klik untuk memisahkan foto pengantin pria dan wanita">
+            <img class="pengantin__photo" src="assets/pengantin.jpg"
+                 alt="Foto pengantin Muhammad dan Siti" loading="lazy">
+          </div>
+          <svg class="pengantin__outline" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs>
+              <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#D4AF37"/>
+                <stop offset="100%" stop-color="#B8860B"/>
+              </linearGradient>
+              <!-- 3. Ornamen sudut: sulur, daun, dan bunga -->
+              <g id="sulur">
+                <path d="M26 162 C 34 84 84 34 162 26" fill="none" stroke="#7A8F6B" stroke-width="2" vector-effect="non-scaling-stroke"/>
+                <path d="M96 46 C 124 36 146 34 162 26" fill="none" stroke="url(#goldGrad)" stroke-width="1.3" vector-effect="non-scaling-stroke"/>
+                <ellipse cx="30" cy="142" rx="13" ry="5" transform="rotate(-46 30 142)" fill="#7A8F6B"/>
+                <ellipse cx="44" cy="100" rx="12.5" ry="4.8" transform="rotate(-70 44 100)" fill="#7A8F6B"/>
+                <ellipse cx="52" cy="124" rx="11.5" ry="4.4" transform="rotate(-12 52 124)" fill="#6B7F5A"/>
+                <ellipse cx="70" cy="84" rx="11.5" ry="4.4" transform="rotate(-18 70 84)" fill="#6B7F5A"/>
+                <ellipse cx="78" cy="64" rx="13" ry="5" transform="rotate(-64 78 64)" fill="#7A8F6B"/>
+                <ellipse cx="104" cy="48" rx="13" ry="5" transform="rotate(-48 104 48)" fill="#7A8F6B"/>
+                <ellipse cx="108" cy="64" rx="11.5" ry="4.4" transform="rotate(-10 108 64)" fill="#6B7F5A"/>
+                <ellipse cx="138" cy="34" rx="12.5" ry="4.8" transform="rotate(-38 138 34)" fill="#7A8F6B"/>
+                <circle cx="118" cy="32" r="2.6" fill="#D4AF37"/>
+                <circle cx="128" cy="38" r="2.2" fill="#D4AF37"/>
+                <g fill="#FDFBF3" stroke="#C9A545" stroke-width="1" vector-effect="non-scaling-stroke">
+                  <ellipse cx="67.75" cy="57.3" rx="5" ry="10.5"/>
+                  <ellipse cx="67.75" cy="57.3" rx="5" ry="10.5" transform="rotate(72 67.75 67.75)"/>
+                  <ellipse cx="67.75" cy="57.3" rx="5" ry="10.5" transform="rotate(144 67.75 67.75)"/>
+                  <ellipse cx="67.75" cy="57.3" rx="5" ry="10.5" transform="rotate(216 67.75 67.75)"/>
+                  <ellipse cx="67.75" cy="57.3" rx="5" ry="10.5" transform="rotate(288 67.75 67.75)"/>
+                </g>
+                <circle cx="67.75" cy="67.75" r="3.4" fill="#D4AF37"/>
+                <g fill="#FDFBF3" stroke="#C9A545" stroke-width=".8" vector-effect="non-scaling-stroke">
+                  <ellipse cx="148" cy="23" rx="3.2" ry="6.8"/>
+                  <ellipse cx="148" cy="23" rx="3.2" ry="6.8" transform="rotate(72 148 30)"/>
+                  <ellipse cx="148" cy="23" rx="3.2" ry="6.8" transform="rotate(144 148 30)"/>
+                  <ellipse cx="148" cy="23" rx="3.2" ry="6.8" transform="rotate(216 148 30)"/>
+                  <ellipse cx="148" cy="23" rx="3.2" ry="6.8" transform="rotate(288 148 30)"/>
+                </g>
+                <circle cx="148" cy="30" r="2.4" fill="#D4AF37"/>
+              </g>
+            </defs>
+            <!-- 4. Bingkai ganda dengan aksen emas dan sage -->
+            <rect x="5" y="5" width="390" height="490" rx="13" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+            <rect x="12" y="12" width="376" height="476" rx="8" fill="none" stroke="#7A8F6B" stroke-width="1.2"/>
+            <use href="#sulur"/>
+            <use href="#sulur" transform="translate(400 500) scale(-1 -1)"/>
+          </svg>
+        </div>
+        <p class="step__body">Muhammad dan Siti, yang pada Senin 30 November 2026
+           bersama keluarga merayakan akad dan resepsi di Masjid Nasional
+           Al-Akbar, Surabaya.</p>
+
+        <div class="pengantin__split" id="pengantinSplit" hidden>
+          <figure class="pengantin__person pengantin__person--pria">
+            <div class="pengantin__wrap pengantin__wrap--person">
+              <dl class="pengantin__desc">
+                <dt>Nama</dt>       <dd>Muhammad</dd>
+                <dt>Umur</dt>       <dd>28 tahun</dd>
+                <dt>Keterangan</dt> <dd>Putra pertama dari keluarga Fulan.</dd>
+              </dl>
+              <div class="pengantin__frame pengantin__frame--person" role="button" tabindex="0" aria-expanded="false"
+                   aria-label="Klik untuk menampilkan deskripsi pengantin pria">
+                <img class="pengantin__photo" src="assets/pengantin-pria.png"
+                     alt="Foto pengantin pria" loading="lazy">
+              </div>
+            </div>
+            <figcaption class="pengantin__caption">Pengantin pria</figcaption>
+          </figure>
+
+          <span class="pengantin__amp" aria-hidden="true">&amp;</span>
+
+          <figure class="pengantin__person pengantin__person--wanita">
+            <div class="pengantin__wrap pengantin__wrap--person">
+              <dl class="pengantin__desc">
+                <dt>Nama</dt>       <dd>Siti</dd>
+                <dt>Umur</dt>       <dd>25 tahun</dd>
+                <dt>Keterangan</dt> <dd>Putri pertama dari keluarga Fulan.</dd>
+              </dl>
+              <div class="pengantin__frame pengantin__frame--person" role="button" tabindex="0" aria-expanded="false"
+                   aria-label="Klik untuk menampilkan deskripsi pengantin wanita">
+                <img class="pengantin__photo" src="assets/pengantin-wanita.png"
+                     alt="Foto pengantin wanita" loading="lazy">
+              </div>
+            </div>
+            <figcaption class="pengantin__caption">Pengantin wanita</figcaption>
+          </figure>
+        </div>
+        </div>
+      </article>
+
+      <article class="step" id="acara" data-step="acara">
+        <h2 class="step__title">Akad &amp; Resepsi</h2>
+
+        <div class="acara">
+          <div class="acara__col">
+            <h3 class="acara__name">Akad Nikah</h3>
+            <p class="acara__desc">Akad dilangsungkan pukul sembilan pagi
+               dengan pembicara Ust. Rahmat Hidayat.</p>
+            <dl class="acara__meta">
+              <dt>Waktu</dt>  <dd>09.00 &ndash; 10.00 WIB</dd>
+              <dt>Tempat</dt> <dd>Masjid Nasional Al-Akbar</dd>
+            </dl>
+          </div>
+
+          <span class="acara__rule" aria-hidden="true"></span>
+
+          <div class="acara__col">
+            <h3 class="acara__name">Resepsi</h3>
+            <p class="acara__desc">Pintu dibuka pukul sebelas siang;
+               berpakaian formal, warna tanah.</p>
+            <dl class="acara__meta">
+              <dt>Waktu</dt>  <dd>11.00 &ndash; 14.00 WIB</dd>
+              <dt>Tempat</dt> <dd>Gedung Rektorat, Universitas Negeri
+                  Surabaya (Lidah Wetan)</dd>
+            </dl>
+          </div>
+        </div>
+
+        <a class="btn btn--ghost acara__cta" href="#lokasi">Lihat lokasi</a>
+      </article>
+
+      <article class="step is-blank" id="pengantar" data-step="pengantar" aria-label="Pengantar">
+        <p class="pengantar__mas">Setiap perjalanan punya cerita yang pantas
+           dikenang, dan hari ini kami mulai menuliskan bab baru bersama.
+           Kehadiran dan doa restu Bapak/Ibu/Saudara/i akan menjadi bunga
+           yang mekar di antara kenangan kami, dan akan kami simpan
+           sepanjang waktu.</p>
+        <p class="pengantar__ucap">Atas kehadiran dan doa yang diberikan,
+           kami ucapkan terima kasih yang sebesar-besarnya.</p>
+        <p class="pengantar__salam">Wassalamu'alaikum Warahmatullahi
+           Wabarakatuh</p>
+      </article>
+
+    </div>
+
+    <div class="prosesi__plate">
+      <div class="plate"></div>
+    </div>
+
+  </section>
+
+  <!-- 5. Bagian berkah: ayat dan hadits -->
+  <section class="berkah">
+
+    <figure class="kutipan">
+      <p class="kutipan__arab" lang="ar" dir="rtl">وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً ۗاِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ</p>
+      <figcaption class="kutipan__arti">“Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.”</figcaption>
+      <cite class="kutipan__sumber">QS. Ar-Rum: 21</cite>
+    </figure>
+
+    <figure class="kutipan">
+      <figcaption class="kutipan__arti">“Sebaik-baik kalian adalah yang paling baik kepada keluarganya, dan aku adalah orang yang paling baik terhadap keluargaku.”</figcaption>
+      <cite class="kutipan__sumber">HR. Tirmidzi 3895</cite>
+    </figure>
+
+  </section>
+
+  <!-- 6. Buku tamu -->
+  <section class="section section--tight" id="buku-tamu">
+    <header class="section__head">
+      <h2>Buku Tamu</h2>
+    </header>
+
+    <div class="tamu">
+      <form class="tamu__form" id="guestForm" novalidate>
+        <label class="field">
+          <span>Nama lengkap</span>
+          <input id="gNama" type="text" required placeholder="Nama Anda" autocomplete="name">
+        </label>
+        <label class="field">
+          <span>No. telepon</span>
+          <input id="gHp" type="tel" required placeholder="08xxxxxxxxxx" autocomplete="tel">
+        </label>
+
+        <fieldset class="hadir">
+          <legend>Kehadiran</legend>
+          <div class="hadir__opsi">
+            <label class="hadir__pilih">
+              <input type="radio" name="hadir" value="ya" checked>
+              <span>Hadir</span>
+            </label>
+            <label class="hadir__pilih">
+              <input type="radio" name="hadir" value="tidak">
+              <span>Tidak hadir</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <label class="field">
+          <span>Ucapan</span>
+          <textarea id="gUcapan" rows="3" required placeholder="Tulis ucapan Anda"></textarea>
+        </label>
+
+        <div class="tamu__foot">
+          <button class="btn btn-primary" type="submit">Kirim ucapan</button>
+          <p class="tamu__msg" id="guestMsg" role="status"></p>
+        </div>
+      </form>
+
+      <div class="tamu__wall">
+        <p class="tamu__wall-label">Ucapan yang masuk</p>
+        <ul class="tamu__list" id="guestList"></ul>
+        <p class="tamu__empty" id="guestEmpty">Belum ada ucapan. Jadilah yang pertama.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Bagian lokasi -->
+  <section class="section section--tint" id="lokasi">
+    <header class="section__head">
+      <h2>Lokasi</h2>
+    </header>
+
+    <div class="lokasi">
+      <div class="lokasi__info">
+        <p class="lokasi__lead">Resepsi digelar di Gedung Rektorat, Universitas
+           Negeri Surabaya, kampus Lidah Wetan, Surabaya.</p>
+
+        <dl class="lokasi__meta">
+          <dt>Alamat</dt>
+          <dd>Gedung Rektorat, Jl. Lidah, Lakarsantri, Surabaya, Jawa Timur 60231</dd>
+          <dt>Koordinat</dt>
+          <dd>&minus;7.300887, 112.672155</dd>
+        </dl>
+
+        <a class="btn btn--ghost" target="_blank" rel="noopener"
+           href="https://www.openstreetmap.org/#map=19/-7.300887/112.672155&amp;layers=N">
+          Buka di Maps
+        </a>
+      </div>
+
+      <div class="lokasi__map">
+        <iframe
+          title="Peta Gedung Rektorat Universitas Negeri Surabaya"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=112.67077356576922%2C-7.301591688320667%2C112.67353624105455%2C-7.300181642961846&amp;layer=mapnik&amp;marker=-7.300887,112.672155"
+          loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p class="footer__names">Muhammad <span>&amp;</span> Siti</p>
+  <p class="footer__meta">30 November 2026 &middot; Surabaya</p>
+</footer>
+
+<button class="top" id="toTop" aria-label="Kembali ke atas">&uarr;</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
